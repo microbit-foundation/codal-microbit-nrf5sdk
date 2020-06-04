@@ -155,7 +155,7 @@ list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/common/ble_srv
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/nrf_ble_gatt/nrf_ble_gatt.c")
 
-list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/nrf_ble_qwr/nrf_ble_qwr.c")
+#list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/nrf_ble_qwr/nrf_ble_qwr.c")
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/peer_manager/gatt_cache_manager.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/peer_manager/gatts_cache_manager.c")
