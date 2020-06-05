@@ -23,9 +23,7 @@ list(APPEND INCLUDE_DIRS
     "${CMAKE_CURRENT_SOURCE_DIR}/../codal-nrf52/nrfx/mdk"
     "${CMAKE_CURRENT_SOURCE_DIR}/../codal-nrf52/nrfx/hal"
     "${CMAKE_CURRENT_SOURCE_DIR}/../codal-nrf52/nrfx"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../codal-nrf52/nrfx/templates/"
     "${CMAKE_CURRENT_SOURCE_DIR}/../codal-nrf52/nrfx/templates/${TEMPLATE}"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../codal-nrf52/nrfx/drivers/include"
 )
 
 
@@ -42,15 +40,12 @@ set(SDK_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../")
 endif()
 
 list(APPEND INCLUDE_SDK_DIRS
-    "${SDK_DIRECTORY}/nRF5SDK/components"
-    "${SDK_DIRECTORY}/nRF5SDK/components/libraries/scheduler"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/pwr_mgmt"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/sortlist"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/strerror"
     "${SDK_DIRECTORY}/nRF5SDK/components/softdevice/common"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/crc16"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/bootloader/dfu"
-    "${SDK_DIRECTORY}/nRF5SDK/components/toolchain/cmsis/include"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util"
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/common"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/balloc"
@@ -65,7 +60,6 @@ list(APPEND INCLUDE_SDK_DIRS
 list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/log"
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/nrf_ble_gatt"
-    "${SDK_DIRECTORY}/nRF5SDK/components/ble/nrf_ble_qwr"
 )
 
 list(APPEND INCLUDE_SDK_DIRS
@@ -78,12 +72,8 @@ list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/bootloader/ble_dfu"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic_fifo"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic"
-    "${SDK_DIRECTORY}/nRF5SDK/components/boards"
-    "${SDK_DIRECTORY}/nRF5SDK/integration/nrfx/legacy"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/memobj"
-    "${SDK_DIRECTORY}/nRF5SDK/integration/nrfx"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/fds"
-    "${SDK_DIRECTORY}/nRF5SDK/components/ble/ble_advertising"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic_flags"
     "${SDK_DIRECTORY}/nRF5SDK/components/softdevice/s140/headers/nrf52"
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/ble_services/ble_dfu"
