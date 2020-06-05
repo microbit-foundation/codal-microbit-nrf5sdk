@@ -1,5 +1,8 @@
 project(codal-microbit-nrf5sdk)
 
+# Set SUPPORT_NRF_LOG to True to compile files needed only for NRF_LOG_XXX
+set( SUPPORT_NRF_LOG True)
+
 # codal-nrf52 includes
 
 string(FIND "${device.processor}" "NRF52840" pos40)
@@ -27,17 +30,21 @@ list(APPEND INCLUDE_DIRS
 )
 
 
-# nRF5SDK includes
+# nRF5SDK_mods includes
 
 list(APPEND INCLUDE_DIRS
     "${CMAKE_CURRENT_SOURCE_DIR}/sdk_config"
     "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods"
 )
 
+
 set(SDK_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 if(REGENERATE)
 set(SDK_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../")
 endif()
+
+
+# nRF5SDK includes
 
 list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/pwr_mgmt"
@@ -48,10 +55,27 @@ list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/bootloader/dfu"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util"
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/common"
+)
+
+
+if (SUPPORT_NRF_LOG)
+list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/balloc"
+)
+endif()
+
+
+list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/peer_manager"
+)
+
+
+if (SUPPORT_NRF_LOG)
+list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/ringbuf"
 )
+endif()
+
 
 list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/timer"
@@ -72,12 +96,32 @@ list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/bootloader/ble_dfu"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic_fifo"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic"
+)
+
+
+if (SUPPORT_NRF_LOG)
+list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/memobj"
+)
+endif()
+
+
+list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/fds"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic_flags"
     "${SDK_DIRECTORY}/nRF5SDK/components/softdevice/s140/headers/nrf52"
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/ble_services/ble_dfu"
+)
+
+
+if (SUPPORT_NRF_LOG)
+list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/external/fprintf"
+)
+endif()
+
+
+list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/svc"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/log/src"
 )
@@ -86,11 +130,14 @@ list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/ble_services/ble_dis"
 )
 
-# needed for NRF_LOG_XXX
+
+if (SUPPORT_NRF_LOG)
 list(APPEND SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/nrf_log_backend_dmesg.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/log/src/nrf_log_backend_serial.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/log/src/nrf_log_frontend.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/log/src/nrf_log_str_formatter.c")
+endif()
+
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util/app_error.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util/app_error_handler_gcc.c")
@@ -111,30 +158,45 @@ list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic_f
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic_flags/nrf_atflags.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic/nrf_atomic.c")
 
-# needed for NRF_LOG_XXX
-list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/balloc/nrf_balloc.c")
 
+if (SUPPORT_NRF_LOG)
+list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/balloc/nrf_balloc.c")
+endif()
+
+
+if (SUPPORT_NRF_LOG)
 # needed for NRF_LOG_XXX
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/external/fprintf/nrf_fprintf.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/external/fprintf/nrf_fprintf_format.c")
+endif()
+
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/fstorage/nrf_fstorage.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/fstorage/nrf_fstorage_sd.c")
 
-# needed for NRF_LOG_XXX
+
+if (SUPPORT_NRF_LOG)
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/memobj/nrf_memobj.c")
+endif()
+
 
 list(APPEND SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/nrf_pwr_mgmt.c")
 
-# needed for NRF_LOG_XXX
+
+if (SUPPORT_NRF_LOG)
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/ringbuf/nrf_ringbuf.c")
+endif()
+
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/experimental_section_vars/nrf_section_iter.c")
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/sortlist/nrf_sortlist.c")
 
-# needed for NRF_LOG_XXX
+
+if (SUPPORT_NRF_LOG)
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/strerror/nrf_strerror.c")
+endif()
+
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/bootloader/dfu/nrf_dfu_svci.c")
 
@@ -170,6 +232,7 @@ list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/ble_services/b
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/ble/ble_services/ble_dis/ble_dis.c")
 
+
 if( REGENERATE )
 message("Regenerating nRF5SDK folder")
 
@@ -191,6 +254,7 @@ foreach ( header_dir ${INCLUDE_SDK_DIRS} )
 endforeach()
 
 endif()
+
 
 # add them
 include_directories(${INCLUDE_DIRS})
