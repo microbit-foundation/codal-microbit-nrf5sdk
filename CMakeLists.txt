@@ -70,7 +70,7 @@ list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/bootloader"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/fstorage"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/experimental_section_vars"
-    "${SDK_DIRECTORY}/nRF5SDK/components/softdevice/s113/headers"
+    "${SDK_DIRECTORY}/nRF5SDK/components/softdevice"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/mutex"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/delay"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/bootloader/ble_dfu"
@@ -89,7 +89,6 @@ endif()
 list(APPEND INCLUDE_SDK_DIRS
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/fds"
     "${SDK_DIRECTORY}/nRF5SDK/components/libraries/atomic_flags"
-    "${SDK_DIRECTORY}/nRF5SDK/components/softdevice/s113/headers/nrf52"
     "${SDK_DIRECTORY}/nRF5SDK/components/ble/ble_services/ble_dfu"
 )
 
