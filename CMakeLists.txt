@@ -17,6 +17,16 @@ list(APPEND INCLUDE_DIRS
     "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods"
 )
 
+# clang nRF5SDK_mods includes
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang") 
+list(APPEND INCLUDE_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/clang"
+    "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/clang/softdevice/s113/headers"
+    "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/clang/softdevice/s113/headers/nrf52"
+)
+endif()
+
 
 set(SDK_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 if(REGENERATE)
@@ -120,7 +130,13 @@ endif()
 
 
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util/app_error.c")
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang") 
+list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK_mods/clang/app_error_handler_gcc.c")
+else()
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util/app_error_handler_gcc.c")
+endif()
+
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util/app_error_weak.c")
 list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util/app_util_platform.c")
 #list(APPEND SOURCE_FILES "${SDK_DIRECTORY}/nRF5SDK/components/libraries/util/nrf_assert.c")
