@@ -1,3 +1,7 @@
+// Taken from: https://github.com/microbit-foundation/codal-microbit-nrf5sdk/blob/1288445575942fc1f262a5895c6b873bb3099d31/nRF5SDK/components/libraries/util/app_error_handler_gcc.c
+// Applied this patch: https://github.com/eblot/nrf5-llvm/blob/a76179789fe3df6c9e44e2acd93c6b7ed4bfe330/error_handler.patch
+
+
 /**
  * Copyright (c) 2017 - 2019, Nordic Semiconductor ASA
  *

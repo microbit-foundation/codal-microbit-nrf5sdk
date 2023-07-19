@@ -1,3 +1,6 @@
+// Taken from: https://github.com/microbit-foundation/codal-microbit-nrf5sdk/blob/ef4662e13875a7b03e7296d7ac24a2b4d231f323/nRF5SDK/components/libraries/svc/nrf_svci.h
+// Replaced pseudo instruction not understood by clang, see line 161 and 162
+
 /**
  * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
  *

@@ -1,3 +1,7 @@
+// Taken from https://github.com/microbit-foundation/codal-microbit-nrf5sdk/blob/ef4662e13875a7b03e7296d7ac24a2b4d231f323/nRF5SDK/components/softdevice/s113/headers/ble_gatts.h
+// This patch applied https://github.com/eblot/nrf5-llvm/blob/a76179789fe3df6c9e44e2acd93c6b7ed4bfe330/nrfsvc.py
+// Changes can be seen from line 851
+
 /*
  * Copyright (c) 2011 - 2018, Nordic Semiconductor ASA
  * All rights reserved.
