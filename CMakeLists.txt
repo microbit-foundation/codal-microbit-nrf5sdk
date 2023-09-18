@@ -22,8 +22,6 @@ list(APPEND INCLUDE_DIRS
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang") 
 list(APPEND INCLUDE_DIRS
     "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/clang"
-    "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/clang/softdevice/s113/headers"
-    "${CMAKE_CURRENT_SOURCE_DIR}/nRF5SDK_mods/clang/softdevice/s113/headers/nrf52"
 )
 endif()
 
