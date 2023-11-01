@@ -1264,6 +1264,11 @@ static ret_code_t write_execute(uint32_t prev_ret, fds_op_t * const p_op)
                 return FDS_ERR_NOT_FOUND;
             }
             // Setting the step is redundant since we are falling through.
+            #if __cplusplus > 201703L // Check if we're running C++17 or better, if so use the new directive.
+                [[fallthrough]];
+            #else
+                __attribute__ ((fallthrough));
+            #endif
         }
         // Fallthrough to FDS_OP_WRITE_HEADER_BEGIN.
 
