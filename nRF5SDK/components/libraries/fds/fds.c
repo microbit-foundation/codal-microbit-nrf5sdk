@@ -1266,7 +1266,7 @@ static ret_code_t write_execute(uint32_t prev_ret, fds_op_t * const p_op)
             // Setting the step is redundant since we are falling through.
         }
         // Fallthrough to FDS_OP_WRITE_HEADER_BEGIN.
-
+        [[ fallthrough ]];
         case FDS_OP_WRITE_HEADER_BEGIN:
             ret = record_header_write_begin(p_op, p_write_addr);
             break;

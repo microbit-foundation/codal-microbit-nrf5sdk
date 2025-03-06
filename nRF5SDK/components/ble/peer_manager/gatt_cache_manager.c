@@ -382,6 +382,7 @@ static void service_changed_send_in_evt(uint16_t conn_handle)
             }
         }
             // Sometimes fallthrough.
+        [[fallthrough]];
         case NRF_ERROR_NOT_SUPPORTED:
             // Service changed not supported. Drop indication.
             sc_pending_state = false;

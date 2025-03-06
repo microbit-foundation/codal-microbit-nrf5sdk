@@ -195,6 +195,11 @@ uint8_t * nrf_fstorage_wmap(nrf_fstorage_t const * p_fs, uint32_t addr)
 
 bool nrf_fstorage_is_busy(nrf_fstorage_t const * p_fs)
 {
+// NRF_FSTORAGE_INSTANCE_GET(i) is not currently compatible with -Warray-bounds,
+// as gcc infers a size of only 4 bytes for the __start_fs_data symbol used in
+// that macro.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
     /* If a NULL instance is provided, return true if any instance is busy.
      * Uninitialized instances are considered not busy. */
     if ((p_fs == NULL) || (p_fs->p_api == NULL))
@@ -216,6 +221,7 @@ bool nrf_fstorage_is_busy(nrf_fstorage_t const * p_fs)
     }
 
     return p_fs->p_api->is_busy(p_fs);
+#pragma GCC diagnostic push
 }
 
 
