@@ -115,6 +115,7 @@
 // SEC_MITM         / WITH_MITM:    3
 //
 
+#ifndef MICROBIT_BLE_SECURITY_MODE
 // Calculate MICROBIT_BLE_SECURITY_MODE from MICROBIT_BLE_SECURITY_LEVEL
 #define __SDK_CONFIG_SECURITY_MODE_ENCRYPTION_OPEN_LINK 1
 #define __SDK_CONFIG_SECURITY_MODE_ENCRYPTION_NO_MITM   2
@@ -132,6 +133,7 @@
 #else
 #define MICROBIT_BLE_SECURITY_MODE 3
 #endif
+#endif //#ifndef MICROBIT_BLE_SECURITY_MODE
 
 #endif //#ifndef MICROBIT_BLE_SECURITY_MODE
 //==========================================================
