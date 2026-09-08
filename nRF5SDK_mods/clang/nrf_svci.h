@@ -1,5 +1,7 @@
 // Taken from: https://github.com/microbit-foundation/codal-microbit-nrf5sdk/blob/ef4662e13875a7b03e7296d7ac24a2b4d231f323/nRF5SDK/components/libraries/svc/nrf_svci.h
-// Replaced pseudo instruction not understood by clang, see line 161 and 162
+// Replaced the "ldr r12, =<constant>" pseudo-instruction, not understood by clang's
+// integrated assembler, with a movw/movt pair in SVCI_DECL_0 and SVCI_DECL. The SVCI
+// number is split into its lower/upper 16 bits so r12 holds exactly svci_num.
 
 /**
  * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
@@ -134,13 +136,15 @@ extern "C" {
                R12 containing the SVCI number */                        \
             __ASM __volatile                                            \
             (                                                           \
-                "  ldr r12, =%0       \n"                               \
-                "  svc %1             \n"                               \
+                "  movw r12, %0       \n"                               \
+                "  movt r12, %1       \n"                               \
+                "  svc %2             \n"                               \
                 "  bx lr              \n"                               \
                 "  .ltorg"                                              \
                 : /* output */                                          \
                 : /* input */                                           \
-                    "X"(svci_num),                                      \
+                    "X"((svci_num) & 0xFFFFU),                          \
+                    "X"((svci_num) >> 16U),                             \
                     "I"(GCC_CAST_CPP NRF_SVCI_SVC_NUM)                  \
                 : /* clobbers */                                        \
                     "r12"                                               \
@@ -160,12 +164,13 @@ extern "C" {
             (                                                           \
                 "  movw r12, %0       \n"                               \
                 "  movt r12, %1       \n"                               \
-                "  svc %1             \n"                               \
+                "  svc %2             \n"                               \
                 "  bx lr              \n"                               \
                 "  .ltorg"                                              \
                 : /* output */                                          \
                 : /* input */                                           \
-                    "X"(svci_num),                                      \
+                    "X"((svci_num) & 0xFFFFU),                          \
+                    "X"((svci_num) >> 16U),                             \
                     "I"(GCC_CAST_CPP NRF_SVCI_SVC_NUM)                  \
                 : /* clobbers */                                        \
                     "r12"                                               \
